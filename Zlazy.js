@@ -50,13 +50,17 @@ var ZYLazy = (function(window){
         },
         init:function(){
             var t = this;
+            var p = {context:t};
+            if(typeof arguments[0] == 'object'){
+                this.extend(p,arguments[0])
+            }
             this.getImag();
             this.update();
             this.on(window,'resize',function(){
-                t.throttle(t.update,{context:t})
+                t.throttle(t.update,p)
             });
             this.on(window,'scroll',function(){
-                t.throttle(t.update,{context:t})
+                t.throttle(t.update,p)
             })
         },
         getImag:function(){
